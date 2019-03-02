@@ -1,0 +1,81 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en-us">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <title>Login</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script>
+        function signin() {
+            $.ajax({
+                url: "/connect/token",
+                type: "post",
+                data: {
+                    client_id: "client2",
+                    client_secret: "secret",
+                    username: $("#username").val(),
+                    password: $("#password").val(),
+                    grant_type:"password"
+                },
+                success: function (res) {
+                    console.log("succ:", res);
+                    //location.href = "/Manager/Dashboard";
+                },
+                error: function (res) {
+                    console.log("error:", res);
+
+                }
+
+
+            });
+            //$.post("Login", $("#loginForm").serialize(), function (res) {
+            //    if (res.code == "Success")
+            //        location.href = res.data;
+            //    else
+            //        alert(res.message);
+            //});
+        }
+    </script>
+</head>
+<body>
+    <div class="container dashboard" style="padding:0;">
+        <div style="height:20vh;line-height:20vh;padding-left:10vw;">
+            <img src="~/images/logo.png" style="width:200px;"/>
+            <span class="login-title">Authentication Server</span>
+        </div>
+        <div style="height:60vh;" class="body">
+        
+        <div class="loginBox">
+            <div class="panel-title">Sign In</div>
+            <form id="loginForm" action="Login" method="post">
+                <input type="text" id="username" name="username" class="form-control" placeholder="E-Mail or Username" />
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password"/>
+                <a class="navbar-link" href="ForgotPassword">Forgot Password?</a>
+                <div style="text-align:center;">
+                    <div class="dy_btn" onclick="signin()" style="width:85px;">
+                        Sign In
+                    </div>
+                </div>
+            </form>
+            <div>
+                <div class="page-header">New to Authentication Server</div>
+                <a href="CreateAccount">Create an account</a>
+            </div>
+        </div>
+    </div>
+    <div style="height:20vh;line-height:20vh;text-align:center;">
+        <span style="font-weight:600;">Copyright (c) 2017 Xiaoyu Video Communications ( Beijing ) Technology Co. Ltd </span>
+    </div>
+    </div>
+</body>
+</html>

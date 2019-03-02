@@ -1,0 +1,7 @@
+﻿{
+  "modules": [
+    {
+      "type": "Mosaic.Repositories.RepositoryModule,Mosaic.Repositories"
+    }
+  ]
+}

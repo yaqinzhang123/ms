@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mosaic.DataObject\Mosaic.DTO.csproj" />
+    <ProjectReference Include="..\Mosaic.Domain\Mosaic.Domain.csproj" />
+    <ProjectReference Include="..\Mosaic.Infrastructure\Mosaic.Infrastructure.csproj" />
+    <ProjectReference Include="..\Mosaic.Repositories\Mosaic.Repositories.csproj" />
+    <ProjectReference Include="..\Mosaic.ServiceContracts\Mosaic.ServiceContracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\newtonsoft.json\10.0.1\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

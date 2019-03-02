@@ -1,0 +1,109 @@
+﻿@using Mosaic.Api.Controllers; 
+@{
+    Layout = null;
+    DataRequest obj = ViewBag.Data;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    <title>扫描二维码</title>
+
+</head>
+<body style='margin:0px;padding:0px;font-size: 14px;font-family:"Microsoft YaHei"'>
+
+    <div>
+        
+    </div>
+    <script>
+        window.onpageshow = function (event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        };
+        
+        //var obj = {};
+        var url1 = location.href.split('#')[0];
+        var urlresult = "";
+        //var url1='dy.sap-unis.com'
+
+        //alert(location.href.split('#')[0])
+        //console.log(obj)
+        //console.log(obj)
+        /*var obj1=$.parseJSON(obj.sign)
+        //var noncestr='Wm3WZYTPz0wzccnW'
+        //var jsapi_ticket='HoagFKDcsGMVCIY2vOjf9p5i_BUorDrL43ATfAes-cWExhfmfySLg756oXHT6ChJR767Dwyo86keGNVtvLT5YQ'
+        //console.log(jsapi_ticket)
+        //var timestamp=1537865412000
+        //var url='http://dy.sap-unis.com/newest/weixin.html'
+        //var string1='jsapi_ticket=HoagFKDcsGMVCIY2vOjf9p5i_BUorDrL43ATfAes-cWExhfmfySLg756oXHT6ChJR767Dwyo86keGNVtvLT5YQ&noncestr=Wm3WZYTPz0wzccnW&timestamp=1537865412000&url=http://job.qhd.com.cn/newest/weixin.html'
+        //console.log(string1)
+        //var sh='898399ac17d8ba90fad2e643dec3fefacd004fbc'*/
+        
+
+        wx.config({
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: "@obj.Appid", // 必填，公众号的唯一标识
+            timestamp: @obj.TimeStamp, // 必填，生成签名的时间戳
+            nonceStr: "@obj.Noncestr", // 必填，生成签名的随机串
+            signature: "@obj.Str",// 必填，签名
+            jsApiList: [
+                'checkJsApi',
+                'scanQRCode'
+            ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2。详见：http://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html
+        });
+        wx.ready(() => {
+            //alert('wx ready')
+            wx.checkJsApi({
+                jsApiList: ['scanQRCode'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+                success: function (res) {
+                    // 以键值对的形式返回，可用的api值true，不可用为false
+                    // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+
+                    //扫码
+                    wx.scanQRCode({
+                        needResult: 1,
+                        desc: 'scanQRCode desc',
+                        success: function (res) {
+                            //alert(res.resultStr)
+                            
+                            window.location.href = "ResultData?content=" + res.resultStr;
+
+                        }
+                    });
+                }
+
+            });
+            
+            
+            
+
+
+        });
+       
+
+
+        wx.error(function (res) {
+            console.log('err', res)
+        });
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

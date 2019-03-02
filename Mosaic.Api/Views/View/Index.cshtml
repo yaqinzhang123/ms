@@ -1,0 +1,54 @@
+﻿@using Mosaic.DTO;
+@{
+    Layout = null;
+    IList<TotalQRCode> totalQRCodeList = ViewBag.TotalQRCodeList;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style>
+        th,td{
+            border:1px solid #000;
+            padding:3px;
+        }
+        td{
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+    <table cellspacing="0" cellpadding="0" style="margin:0 auto;border-collapse:collapse;width:800px;" >
+        <thead>
+            <tr>
+                <th>产线</th>
+                <th>品类</th>
+                <th>总数</th>
+                <th>兜数</th>
+                <th>尾数</th>
+                <th>真实兜数</th>
+                <th>真实尾数</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var totalQRCode in totalQRCodeList)
+            {
+
+                <tr>
+                    <td>@totalQRCode.ProductionLineID</td>
+                    <td>@totalQRCode.CID</td>
+                    <td>@totalQRCode.Total</td>
+                    <td>@totalQRCode.GroupCount</td>
+                    <td>@totalQRCode.Remainder</td>
+                    <td>@totalQRCode.GroupCountTrue</td>
+                    <td>@totalQRCode.RemainderTrue</td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</body>
+</html>

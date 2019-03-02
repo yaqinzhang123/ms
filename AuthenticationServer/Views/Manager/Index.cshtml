@@ -1,0 +1,51 @@
+﻿@using AuthenticationServer.DataObjects;
+@using System.Reflection;
+@{
+    Layout = null;
+    IList<AppInfoDataObject> appinfoList = ViewBag.AppInfoList;
+    PropertyInfo[] properties = typeof(AppInfoDataObject).GetProperties();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.css" />    
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+</head>
+<body>
+    <div class="container">
+    <h1 class="page-header">Authentication Server</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                @foreach(var property in properties)
+                {
+                    <th>@property.Name</th>
+
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var data in appinfoList)
+            {
+                <tr>
+                    @foreach(var property in properties)
+                    {
+                        <td>
+                            @property.GetValue(data)
+                        </td>
+
+                    }
+                </tr>
+
+            }
+        </tbody>
+    </table>
+        </div>
+</body>
+</html>

@@ -1,0 +1,237 @@
+﻿@using Mosaic.Api.Controllers;
+@{
+    Layout = null;
+    DataRequest obj = ViewBag.Data;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/iconfont.js"></script>
+    <link href="~/css/iconfont.css" rel="stylesheet" />
+    <title>美盛公司</title>
+    <style>
+        html {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: "微软雅黑";
+            /*background-image: url("/images/006.jpg");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;*/
+            margin: 0;
+            border: 0;
+            background: -webkit-linear-gradient(#23375c, #145a73); /* Safari 5.1 - 6.0 */
+            background: -o-linear-gradient(#23375c, #145a73); /* Opera 11.1 - 12.0 */
+            background: -moz-linear-gradient(#23375c, #145a73); /* Firefox 3.6 - 15 */
+            background: linear-gradient(#23375c, #145a73); /* 标准的语法 */
+        }
+
+        .all {
+            margin: 0 auto;
+            border: 0;
+            margin: 0;
+            margin-top: 30px;
+            margin-right: 15px;
+            margin-left: 15px;
+        }
+
+        .header {
+            width:100%;
+        }
+
+        .logo {
+            width: 60px;
+        }
+
+        .title {
+            width: 100%;
+            display: inline-block;
+            text-align: center;
+            vertical-align: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #e3f2ef;
+        }
+
+        .content {
+            width: 90%;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+        .imgborder {
+            width: 150px;
+            margin: 0 auto;
+        }
+
+        .logo2 {
+            display: block;
+            margin: 0 auto;
+            width: 120px;
+            height: 100px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        input {
+            width: 56%;
+            height: 30px;
+            border: 0;
+            outline: 0;
+            text-indent: 10px;
+            color: #e3f2ef;
+            margin-left: 10px;
+            background-color: rgba(0,0,0,0);
+            float: right;
+        }
+
+        .content1, .content2 {
+            margin: 0 auto;
+            margin-top: 20px;
+            font-size: 16px;
+            border: 1px solid #808080;
+            width: 80%;
+            height: 35px;
+            border-radius: 8px;
+        }
+
+        .user, .password {
+            font-size: 14px;
+            line-height: 35px;
+            margin-left: 5px;
+            color: #e3f2ef;
+        }
+
+
+
+        .login {
+            margin: 0 auto;
+            width: 40%;
+            height: 30px;
+            margin-top: 30px;
+            background: -webkit-linear-gradient(#6a9fb1, #0f3743); /* Safari 5.1 - 6.0 */
+            background: -o-linear-gradient(#6a9fb1, #0f3743); /* Opera 11.1 - 12.0 */
+            background: -moz-linear-gradient(#6a9fb1, #0f3743); /* Firefox 3.6 - 15 */
+            background: linear-gradient(#6a9fb1, #0f3743); /* 标准的语法 */
+            border-radius: 10px;
+        }
+
+        .logina {
+            display: inline-block;
+            width: 100%;
+            line-height: 30px;
+            text-align: center;
+            text-decoration: none;
+            color: #e3f2ef;
+        }
+
+        .error {
+            color: red;
+            margin: 0 auto;
+            width: 70%;
+            text-align: center;
+            line-height: 30px;
+            font-size: 12px;
+            color: red;
+            margin-top: 10px;
+        }
+
+        .footer {
+            width: 80%;
+            color: #e3f2ef;
+            font-size: 10px;
+            margin-top: 150px;
+            text-align: center;
+            position: absolute;
+            bottom: 30px;
+            left: 10%;
+        }
+    </style>
+</head>
+<body >
+    <div class="all">
+
+        <div class="header">
+            
+            <p class="title">美盛农资（北京）有限公司</br>产品追溯系统</p>
+        </div>
+        
+                <div class="content">
+                    <div class="imgborder"><img src="~/images/13logo.png" alt="Alternate Text"  class="logo2"/></div>
+                
+                    <div class="content1">
+                        <span class="user"><i class="iconfont">&#xe6b6;</i> 账 号 :</span><input type="text" name="username" value=""  class="user1"/>
+                    </div>
+                    <div class="content2">
+                        <span class="password"><i class="iconfont">&#xe622;</i> 密 码 :</span><input type="password" name="password" value="" class="password1"/>
+                    </div>
+                    <p class="error"></p>
+                </div>
+
+            <div class="login">
+                <a href="#" class="logina">登 录 <i class="iconfont">&#xf0052;</i></a>
+            </div>
+              
+       
+
+    </div>
+    <script>
+
+        if (localStorage.getItem('name') == "putongyonghu") {
+
+            localStorage.setItem('name', " ")
+            $('.user1').val(" ")
+
+        } else {
+            $('.user1').val(localStorage.getItem('name'))
+
+        }
+        
+        $(".logina" ).click(function () {
+            var user = $(".user1").val().trim();
+            var password = $(".password1").val().trim();
+            console.log(user, password)
+            let data1 = { name: user, password: password }
+            
+            $.ajax({
+                type: "post",
+                url: "/api/UserInfo/Login",
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify(data1),
+                success: function (res) {
+                    console.log(res)
+                    //alert(res.data.message)
+                    if (res.data != null) {
+                        localStorage.setItem('name', user)
+                        $(".logina").attr("href", "wx")
+                    } else {
+                        alert(res.message)
+
+                    }
+                    
+
+                },
+                error: function (error) {
+                    console.log(error)
+                    //alert(error)
+
+                }
+
+            })
+
+        })
+    </script>
+    
+</body>
+
+</html>

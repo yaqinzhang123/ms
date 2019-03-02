@@ -1,0 +1,135 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en-us">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <title>CreateAccount</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>    
+    <style>
+
+        input{
+            margin:0;
+        }
+        .modal{
+            
+        }
+    </style>
+    <script>
+        function createAccount() {
+
+            $("#frmCreateAccount").submit();
+
+        }
+        function closeModal() {
+            $("#dialog").modal("hide");
+
+        }
+        function checkform() {
+            var mailFormat = /[a-zA-Z0-9_-]+@@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_ ]+)+$/
+            if ($("#email").val().trim() == 0) {
+                showDialog("Please input your email！");
+                return false;
+
+            }
+            if (!mailFormat.test( $("#email").val().trim())) {
+                showDialog("Please input your email with correct format!");
+                return false;
+            }
+
+            if ($("#username").val().trim() == 0) {
+                showDialog("Please input your username!");
+                return false;
+
+            }
+            if ($("#nickname").val().trim() == 0) {
+                showDialog("Please input your nickname!");
+                return false;
+
+            }
+            if ($("#password").val().trim() == 0) {
+                showDialog("Please input your password!");
+                return false;
+            }
+            if ($("#repassword").val().trim() == 0) {
+                showDialog("Please input your verify password it should same to password!");
+                return false;
+
+            }
+            if ($("#repassword").val() != $("#password").val()) {
+                showDialog("Please confirm whether the password is consistent with the verify password！ ")
+                return false;
+            }
+
+        }
+        function showDialog(txt) {
+            $("#modalText").text(txt);
+            $("#dialog").modal();
+
+        }
+    </script>
+</head>
+<body>
+    <div class="bg"></div>
+    <div class="container registerBox">
+          <h2 class="page-header">Join Authentication Server</h2>
+          <form id="frmCreateAccount" action="CreateAccount" method="post" onsubmit="return checkform()">
+              <label>E-Mail:</label>
+              <input id="email" name="email" class="form-control" type="text" placeholder="E-Mail" />
+              <div>
+                  We’ll occasionally send updates about your account to this inbox. We’ll never share your email address with anyone.
+              </div>
+              <label> Username:</label>
+              <input id="username" name="username" class="form-control" type="text" placeholder="Username" />
+              <div>
+                  This will be your username. 
+              </div>
+              <label>Nickname:</label>
+              <input id="nickname" name="nickname" class="form-control" type="text" placeholder="Nickname" />
+              <div>
+                  Choose a nickname that is well remembered.
+              </div>
+              <label>Password:</label>
+              <input id="password" name="password" class="form-control" type="password" placeholder="Password" />
+              <div>
+                  Use at least one lowercase letter, one numeral, and seven characters.
+              </div>
+              <label>Verify Password:</label>
+              <input id="repassword" name="repassword" class="form-control" type="password" placeholder="Verify Password" />
+              <div>
+                  Verify the password to prevent it from forgetting it.
+              </div>
+              <div>
+                  <div class="dy_btn" style="width:150px;" onclick="createAccount()">
+                      Create Account
+                    </div>
+              </div>
+
+
+          </form>
+    </div>
+    <div class="modal fade" id="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close">&times;</button>
+                    <h4 class="modal-title">Authentication Server</h4>
+                </div>
+                <div class="modal-body" id="modalText"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="closeModal()">Close</button>
+                </div>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
